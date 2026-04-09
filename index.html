@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer Pro</title>
+    <meta name="description" content="Advanced AI-powered resume analysis for ATS compatibility and optimization.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Background Elements -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="grid-bg"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#paint0_linear)" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M2 17L12 22L22 17" stroke="url(#paint1_linear)" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M2 12L12 17L22 12" stroke="url(#paint2_linear)" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <defs>
+                    <linearGradient id="paint0_linear" x1="2" y1="7" x2="22" y2="7" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#06B6D4" />
+                        <stop offset="1" stop-color="#8B5CF6" />
+                    </linearGradient>
+                    <linearGradient id="paint1_linear" x1="2" y1="19.5" x2="22" y2="19.5"
+                        gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#06B6D4" />
+                        <stop offset="1" stop-color="#8B5CF6" />
+                    </linearGradient>
+                    <linearGradient id="paint2_linear" x1="2" y1="14.5" x2="22" y2="14.5"
+                        gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#06B6D4" />
+                        <stop offset="1" stop-color="#8B5CF6" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span>Resume<span class="gradient-text">AI</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How it Works</a>
+            <button class="btn-primary" id="openAuthBtn">Sign In</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                <span>Powered by Advanced Next-Gen AI</span>
+            </div>
+            <h1>Unlock Your Career Potential with <span class="gradient-text">AI-Driven Insights</span></h1>
+            <p>Upload your resume and get an instant, deep-dive analysis on ATS compatibility, keyword optimization, and
+                actionable feedback to land your dream job.</p>
+
+            <!-- Upload Area -->
+            <div class="upload-container" id="uploadArea">
+                <div class="upload-box">
+                    <div class="upload-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3>Drag & Drop your Resume here</h3>
+                    <p>Supports PDF, DOCX (Max 5MB)</p>
+                    <label for="fileInput" class="btn-secondary">Browse Files</label>
+                    <input type="file" id="fileInput" accept=".pdf,.doc,.docx" hidden>
+                </div>
+            </div>
+
+            <!-- Analyzing State (Hidden initially) -->
+            <div class="analyzing-container hidden" id="analyzingArea">
+                <div class="scanning-animation">
+                    <div class="scan-line"></div>
+                    <svg class="file-icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                </div>
+                <div class="scan-details">
+                    <h3 id="scanStatus">Extracting Text...</h3>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Dashboard (Mockup, Hidden initially) -->
+            <div class="results-dashboard hidden" id="resultsArea">
+                <div class="score-card">
+                    <div class="circular-progress" data-progress="85">
+                        <div class="value-container">85%</div>
+                    </div>
+                    <div class="score-info">
+                        <h2>Excellent Resume!</h2>
+                        <p>Your resume is highly optimized for ATS systems, but there's still a little room for
+                            improvement.</p>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon ats-icon"></span>
+                            <h4>ATS Parse Rate</h4>
+                        </div>
+                        <div class="metric-value">92%</div>
+                        <p class="metric-desc">Easily readable by applicant tracking systems.</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon keyword-icon"></span>
+                            <h4>Keyword Match</h4>
+                        </div>
+                        <div class="metric-value">78%</div>
+                        <p class="metric-desc">Good use of industry-standard terms.</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon impact-icon"></span>
+                            <h4>Impact & Action</h4>
+                        </div>
+                        <div class="metric-value">88%</div>
+                        <p class="metric-desc">Strong use of action verbs and metrics.</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon brief-icon"></span>
+                            <h4>Brevity</h4>
+                        </div>
+                        <div class="metric-value">80%</div>
+                        <p class="metric-desc">Appropriate length and clear formatting.</p>
+                    </div>
+                </div>
+
+                <!-- Feedback Section -->
+                <div class="feedback-section">
+                    <h3>Critiques & Recommendations</h3>
+                    <div class="feedback-list">
+                        <div class="feedback-item critical">
+                            <div class="fb-icon-wrapper"><span class="fb-icon">✕</span></div>
+                            <div class="fb-content">
+                                <h4>Quantify Your Impact</h4>
+                                <p>You have 3 bullet points missing measurable results. Add numbers or percentages
+                                    (e.g., "Increased sales by 15%").</p>
+                            </div>
+                        </div>
+                        <div class="feedback-item warning">
+                            <div class="fb-icon-wrapper"><span class="fb-icon">!</span></div>
+                            <div class="fb-content">
+                                <h4>Use Stronger Action Verbs</h4>
+                                <p>Replace passive phrasing like "helped with" and "worked on" with "spearheaded",
+                                    "engineered", or "orchestrated".</p>
+                            </div>
+                        </div>
+                        <div class="feedback-item success">
+                            <div class="fb-icon-wrapper"><span class="fb-icon">✓</span></div>
+                            <div class="fb-content">
+                                <h4>Great Contact Information</h4>
+                                <p>Your email and LinkedIn URLs are perfectly formatted and easily readable by major
+                                    Applicant Tracking Systems.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-primary reset-btn" id="resetBtn">Analyze Another Resume</button>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section" id="features">
+            <h2>Why use our <span class="gradient-text">Engine?</span></h2>
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="f-icon">⚡</div>
+                    <h3>Instant Feedback</h3>
+                    <p>Get a comprehensive analysis in seconds. No waiting around.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="f-icon">🎯</div>
+                    <h3>ATS Optimization</h3>
+                    <p>See exactly how Applicant Tracking Systems parse your details.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="f-icon">📝</div>
+                    <h3>Actionable Advice</h3>
+                    <p>Line-by-line suggestions on how to rephrase bullet points for maximum impact.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it Works Section -->
+        <section class="how-it-works-section" id="how-it-works">
+            <h2>How it <span class="gradient-text">Works</span></h2>
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Upload Resume</h3>
+                    <p>Simply drag and drop your PDF or DOCX file into our secure analyzer.</p>
+                </div>
+                <div class="step-line"></div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>AI Analysis</h3>
+                    <p>Our intelligent engine scans for ATS compatibility, keywords, and impact.</p>
+                </div>
+                <div class="step-line"></div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Get Insights</h3>
+                    <p>Review comprehensive feedback and actionable tips to improve your score.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Auth Modal -->
+        <div class="modal-overlay" id="authModal">
+            <div class="auth-modal">
+                <button class="close-modal" id="closeAuthBtn">&times;</button>
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="signin">Sign In</button>
+                    <button class="auth-tab" data-tab="signup">Sign Up</button>
+                </div>
+
+                <div class="auth-form-container">
+                    <!-- Sign In Form -->
+                    <form id="signInForm" class="auth-form active">
+                        <h3>Welcome Back</h3>
+                        <p>Enter your details to access your account.</p>
+                        <div class="form-group">
+                            <label for="signinEmail">Email</label>
+                            <input type="email" id="signinEmail" name="email" required placeholder="you@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="signinPassword">Password</label>
+                            <input type="password" id="signinPassword" name="password" required placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn-primary w-100">Sign In</button>
+                        <div id="signInMessage" class="form-message"></div>
+                    </form>
+
+                    <!-- Sign Up Form -->
+                    <form id="signUpForm" class="auth-form">
+                        <h3>Create Account</h3>
+                        <p>Start optimizing your resume today.</p>
+                        <div class="form-group">
+                            <label for="signupName">Full Name</label>
+                            <input type="text" id="signupName" name="name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="signupEmail">Email</label>
+                            <input type="email" id="signupEmail" name="email" required placeholder="you@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <input type="password" id="signupPassword" name="password" required
+                                placeholder="Create a password">
+                        </div>
+                        <button type="submit" class="btn-primary w-100">Sign Up</button>
+                        <div id="signUpMessage" class="form-message"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 AI Resume Analyzer Pro. Built for success. Suraj Kr. Hazra </p>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
